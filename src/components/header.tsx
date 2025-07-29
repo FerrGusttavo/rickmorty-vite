@@ -4,7 +4,7 @@ const options = linkOptions([
   {
     to: '/',
     label: 'Personagens',
-    activeOptions: { exact: true },
+    activeOptions: { exact: true, includeSearch: false },
   },
   {
     to: '/episodes',

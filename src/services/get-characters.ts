@@ -28,13 +28,21 @@ export interface Character {
   created: string
 }
 
+interface GetCharactersRequest {
+  page: number
+}
+
 interface GetCharactersResponse {
   info: Info
   results: Character[]
 }
 
-export async function getCharacters() {
-  const response = await api.get<GetCharactersResponse>('/character')
+export async function getCharacters({
+  page,
+}: GetCharactersRequest): Promise<GetCharactersResponse> {
+  const response = await api.get<GetCharactersResponse>(
+    `/character?page=${page}`,
+  )
 
   return response.data
 }
