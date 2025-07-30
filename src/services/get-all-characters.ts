@@ -1,36 +1,15 @@
 import { isAxiosError } from 'axios'
 import { api } from '@/lib/axios/api'
-
-interface Info {
-  count: number
-  pages: number
-}
-
-export interface Character {
-  id: number
-  name: string
-  status: string
-  species: string
-  location: {
-    name: string
-  }
-  image: string
-}
-
-interface GetCharactersRequest {
-  page: number
-}
-
-interface GetCharactersResponse {
-  info: Info
-  results: Character[]
-}
+import type {
+  GetAllCharactersParams,
+  GetAllCharactersResponse,
+} from '@/types/character'
 
 export async function getAllCharacters({
   page,
-}: GetCharactersRequest): Promise<GetCharactersResponse> {
+}: GetAllCharactersParams): Promise<GetAllCharactersResponse> {
   try {
-    const response = await api.get<GetCharactersResponse>(
+    const response = await api.get<GetAllCharactersResponse>(
       `/character?page=${page}`,
     )
     return response.data

@@ -1,9 +1,9 @@
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
-import type { Character } from '@/services/get-all-characters'
+import type { CharacterListItem } from '@/types/character'
 
 interface CharacterCardProps {
-  character: Character
+  character: CharacterListItem
 }
 
 export function CharacterCard({ character }: CharacterCardProps) {
