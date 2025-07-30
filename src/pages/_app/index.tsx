@@ -4,12 +4,14 @@ import { useEffect } from 'react'
 import { Loading } from '@/components/loading'
 import { Pagination } from '@/components/pagination'
 import { getAllCharacters } from '@/services/get-all-characters'
+import { validatePageParam } from '@/utils/validate-page'
 import { CharacterCard } from './-components/character-card'
 
 export const Route = createFileRoute('/_app/')({
   validateSearch: (search) => {
-    const page = Number(search.page ?? 1)
-    return { page: page > 0 && Number.isInteger(page) ? page : 1 }
+    return {
+      page: validatePageParam(search.page),
+    }
   },
   component: Home,
 })
