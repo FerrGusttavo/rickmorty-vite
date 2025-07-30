@@ -1,10 +1,9 @@
+import { isAxiosError } from 'axios'
 import { api } from '@/lib/axios/api'
 
 interface Info {
   count: number
   pages: number
-  next: string
-  prev: string
 }
 
 export interface Character {
@@ -12,20 +11,10 @@ export interface Character {
   name: string
   status: string
   species: string
-  type: string
-  gender: string
-  origin: {
-    name: string
-    url: string
-  }
   location: {
     name: string
-    url: string
   }
   image: string
-  episodes: string[]
-  url: string
-  created: string
 }
 
 interface GetCharactersRequest {
@@ -37,12 +26,21 @@ interface GetCharactersResponse {
   results: Character[]
 }
 
-export async function getCharacters({
+export async function getAllCharacters({
   page,
 }: GetCharactersRequest): Promise<GetCharactersResponse> {
-  const response = await api.get<GetCharactersResponse>(
-    `/character?page=${page}`,
-  )
+  try {
+    const response = await api.get<GetCharactersResponse>(
+      `/character?page=${page}`,
+    )
+    return response.data
+  } catch (err) {
+    if (isAxiosError(err)) {
+      if (err.response?.status === 404) {
+        throw err
+      }
+    }
 
-  return response.data
+    throw err
+  }
 }

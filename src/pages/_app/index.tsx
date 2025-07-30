@@ -1,27 +1,42 @@
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { Loading } from '@/components/loading'
 import { Pagination } from '@/components/pagination'
-import { getCharacters } from '@/services/get-characters'
+import { getAllCharacters } from '@/services/get-all-characters'
 import { CharacterCard } from './-components/character-card'
 
 export const Route = createFileRoute('/_app/')({
-  validateSearch: (search) => ({
-    page: Number(search.page ?? 1),
-  }),
+  validateSearch: (search) => {
+    const page = Number(search.page ?? 1)
+    return { page: page > 0 && Number.isInteger(page) ? page : 1 }
+  },
   component: Home,
 })
 
 function Home() {
   const { page } = Route.useSearch()
-  const navigate = useNavigate({ from: Route.fullPath })
+  const navigate = useNavigate()
 
-  const { data: characters } = useQuery({
+  const {
+    data: characters,
+    isError,
+    isLoading,
+  } = useQuery({
     queryKey: ['characters', page],
-    queryFn: () => getCharacters({ page }),
+    queryFn: () => getAllCharacters({ page }),
+    retry: false,
+    placeholderData: keepPreviousData,
   })
 
-  function changePage(newPage: number) {
-    navigate({ search: (old) => ({ ...old, page: newPage }) })
+  useEffect(() => {
+    if (isError) {
+      navigate({ search: { page: 1 }, from: Route.fullPath })
+    }
+  }, [isError, navigate])
+
+  if (isLoading || !characters) {
+    return <Loading />
   }
 
   return (
@@ -29,16 +44,18 @@ function Home() {
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
         Personagens
       </h2>
+      {characters.info.pages > 1 && (
+        <Pagination
+          currentPage={page}
+          numberPages={characters.info.pages}
+          numberItems={characters.info.count}
+        />
+      )}
       <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {characters?.results.map((character) => (
+        {characters.results.map((character) => (
           <CharacterCard key={character.id} character={character} />
         ))}
       </div>
-      <Pagination
-        currentPage={page}
-        maxPages={characters?.info.pages}
-        onPageChange={changePage}
-      />
     </>
   )
 }
