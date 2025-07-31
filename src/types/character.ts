@@ -9,6 +9,12 @@ export interface CharacterListItem {
   }
 }
 
+interface CharacterDetails extends CharacterListItem {
+  origin: {
+    name: string
+  }
+  episode: string[]
+}
 interface Info {
   count: number
   pages: number
@@ -22,3 +28,9 @@ export interface GetAllCharactersResponse {
   info: Info
   results: CharacterListItem[]
 }
+
+export interface GetCharacterDetailsRequestParams {
+  characterId: number
+}
+
+export type GetCharacterDetailsResponse = CharacterDetails

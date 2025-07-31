@@ -18,3 +18,7 @@ export interface GetAllEpisodesResponse {
   info: Info
   results: EpisodeListItem[]
 }
+
+export interface GetEpisodesByIdsParams {
+  episodesIds: number[]
+}
