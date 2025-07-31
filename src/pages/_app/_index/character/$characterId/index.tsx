@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
-import { Loading } from '@/components/loading'
-import { LoadingMini } from '@/components/loading-mini'
 import { getCharacterDetails } from '@/services/get-character-details'
 import { getEpisodesByIds } from '@/services/get-episodes-by-ids'
-import { EpisodeCard } from '../../_episodes/-components/episode-card'
+import { Loading } from '@/shared/components/loading'
+import { LoadingMini } from '@/shared/components/loading-mini'
+import { EpisodeCard } from '../../../episodes/-components/episode-card'
 
 export const Route = createFileRoute(
-  '/_app/_characters/character/$characterId',
+  '/_app/_index/character/$characterId/',
 )({
   component: RouteComponent,
 })

@@ -1,32 +1,32 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
-import { Loading } from '@/components/loading'
-import { Pagination } from '@/components/pagination'
-import { getAllCharacters } from '@/services/get-all-characters'
-import { validatePageParam } from '@/utils/validate-page'
-import { CharacterCard } from './-components/character-card'
+import { getAllEpisodes } from '@/services/get-all-episodes'
+import { Loading } from '@/shared/components/loading'
+import { Pagination } from '@/shared/components/pagination'
+import { validatePageParam } from '@/shared/utils/validate-page'
+import { EpisodeCard } from './-components/episode-card'
 
-export const Route = createFileRoute('/_app/_characters/')({
+export const Route = createFileRoute('/_app/episodes/')({
   validateSearch: (search) => {
     return {
       page: validatePageParam(search.page),
     }
   },
-  component: Home,
+  component: EpisodesPage,
 })
 
-function Home() {
+function EpisodesPage() {
   const { page } = Route.useSearch()
   const navigate = useNavigate()
 
   const {
-    data: characters,
+    data: episodes,
     isError,
     isLoading,
   } = useQuery({
-    queryKey: ['characters', page],
-    queryFn: () => getAllCharacters({ page }),
+    queryKey: ['episodes', page],
+    queryFn: () => getAllEpisodes({ page }),
     retry: false,
     placeholderData: keepPreviousData,
   })
@@ -37,25 +37,23 @@ function Home() {
     }
   }, [isError, navigate])
 
-  if (isLoading || !characters) {
+  if (isLoading || !episodes) {
     return <Loading />
   }
 
   return (
     <>
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
-        Personagens
+        Episódios
       </h2>
-      {characters.info.pages > 1 && (
-        <Pagination
-          currentPage={page}
-          numberPages={characters.info.pages}
-          numberItems={characters.info.count}
-        />
-      )}
+      <Pagination
+        currentPage={page}
+        numberPages={episodes.info.pages}
+        numberItems={episodes.info.count}
+      />
       <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {characters.results.map((character) => (
-          <CharacterCard key={character.id} character={character} />
+        {episodes.results.map((episode) => (
+          <EpisodeCard key={episode.id} episode={episode} />
         ))}
       </div>
     </>
