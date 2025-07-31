@@ -1,17 +1,17 @@
 import { isAxiosError } from 'axios'
 import { api } from '@/lib/axios/api'
 import type {
-  GetCharacterDetailsRequestParams,
-  GetCharacterDetailsResponse,
-} from '@/types/character'
+  GetEpisodeByIdParams,
+  GetEpisodeByIdResponse,
+} from '@/types/episode'
 
-export async function getCharacterDetails({
-  charactersIds,
-}: GetCharacterDetailsRequestParams): Promise<GetCharacterDetailsResponse[]> {
+export async function getEpisodeById({
+  episodesIds,
+}: GetEpisodeByIdParams): Promise<GetEpisodeByIdResponse[]> {
   try {
     const response = await api.get<
-      GetCharacterDetailsResponse | GetCharacterDetailsResponse[]
-    >(`/character/${charactersIds}`)
+      GetEpisodeByIdResponse | GetEpisodeByIdResponse[]
+    >(`/episode/${episodesIds.join(',')}`)
     const data = response.data
     return Array.isArray(data) ? data : [data]
   } catch (err) {

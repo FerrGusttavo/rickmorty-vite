@@ -8,7 +8,7 @@ interface EpisodeCardProps {
 export function EpisodeCard({ episode }: EpisodeCardProps) {
   return (
     <Link
-      to={'/episode/$episodeId'}
+      to={'/episodes/$episodeId'}
       params={{ episodeId: episode.id }}
       className="bg-gray-100 p-4 space-y-2 rounded-md flex items-center h-40 justify-center"
     >

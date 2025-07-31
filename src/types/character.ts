@@ -9,7 +9,7 @@ export interface CharacterListItem {
   }
 }
 
-interface CharacterDetails extends CharacterListItem {
+export interface CharacterDetails extends CharacterListItem {
   origin: {
     name: string
   }
@@ -30,7 +30,7 @@ export interface GetAllCharactersResponse {
 }
 
 export interface GetCharacterDetailsRequestParams {
-  characterId: number
+  charactersIds: number[]
 }
 
 export type GetCharacterDetailsResponse = CharacterDetails

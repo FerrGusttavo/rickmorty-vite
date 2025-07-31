@@ -2,33 +2,36 @@ import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
 import { getCharacterDetails } from '@/services/get-character-details'
-import { getEpisodesByIds } from '@/services/get-episodes-by-ids'
+import { getEpisodeById } from '@/services/get-episode-by-id'
 import { Loading } from '@/shared/components/loading'
 import { LoadingMini } from '@/shared/components/loading-mini'
 import { EpisodeCard } from '../../../episodes/-components/episode-card'
 
-export const Route = createFileRoute(
-  '/_app/_index/character/$characterId/',
-)({
-  component: RouteComponent,
+export const Route = createFileRoute('/_app/_index/characters/$characterId/')({
+  component: CharacterDetailsPage,
 })
 
-function RouteComponent() {
+function CharacterDetailsPage() {
   const { characterId } = Route.useParams()
   const [showImage, setShowImage] = useState(false)
 
   const {
-    data: character,
+    data: characters,
     isError,
     isLoading,
     isSuccess,
   } = useQuery({
     queryKey: ['character', characterId],
-    queryFn: () => getCharacterDetails({ characterId }),
+    queryFn: () => getCharacterDetails({ charactersIds: characterId }),
   })
 
+  const character = characters?.[0]
+
   const episodesIds = useMemo(() => {
-    return character?.episode.map((ep) => Number(ep.split('/').pop())) ?? []
+    return (
+      character?.episode.map((episode) => Number(episode.split('/').pop())) ??
+      []
+    )
   }, [character])
 
   const {
@@ -37,7 +40,7 @@ function RouteComponent() {
     isLoading: isLoadingEpisodes,
   } = useQuery({
     queryKey: ['episodes', episodesIds],
-    queryFn: () => getEpisodesByIds({ episodesIds: episodesIds ?? [] }),
+    queryFn: () => getEpisodeById({ episodesIds: episodesIds ?? [] }),
     enabled: !!episodesIds?.length,
   })
 

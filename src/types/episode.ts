@@ -19,6 +19,10 @@ export interface GetAllEpisodesResponse {
   results: EpisodeListItem[]
 }
 
-export interface GetEpisodesByIdsParams {
+export interface GetEpisodeByIdParams {
   episodesIds: number[]
+}
+
+export interface GetEpisodeByIdResponse extends EpisodeListItem {
+  characters: string[]
 }
