@@ -5,7 +5,7 @@ import type {
   GetCharacterDetailsResponse,
 } from '@/types/character'
 
-export async function getCharacterDetails({
+export async function getCharacterById({
   charactersIds,
 }: GetCharacterDetailsRequestParams): Promise<GetCharacterDetailsResponse[]> {
   try {

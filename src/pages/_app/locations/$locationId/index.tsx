@@ -2,36 +2,34 @@ import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo } from 'react'
 import { getCharacterById } from '@/services/get-character-by-id'
-import { getEpisodeById } from '@/services/get-episode-by-id'
+import { getLocationById } from '@/services/get-location-by-id'
 import { Loading } from '@/shared/components/loading'
 import { LoadingMini } from '@/shared/components/loading-mini'
 import { CharacterCard } from '../../_index/-components/character-card'
 
-export const Route = createFileRoute('/_app/episodes/$episodeId/')({
-  component: EpisodeDetailsPage,
+export const Route = createFileRoute('/_app/locations/$locationId/')({
+  component: LocationDetailsPage,
 })
 
-function EpisodeDetailsPage() {
-  const { episodeId } = Route.useParams()
+function LocationDetailsPage() {
+  const { locationId } = Route.useParams()
 
   const {
-    data: episodes,
+    data: location,
     isError,
     isLoading,
   } = useQuery({
-    queryKey: ['episode', episodeId],
-    queryFn: () => getEpisodeById({ episodesIds: [Number(episodeId)] }),
+    queryKey: ['location', locationId],
+    queryFn: () => getLocationById({ locationId }),
   })
-
-  const episode = episodes?.[0]
 
   const charactersIds = useMemo(() => {
     return (
-      episode?.characters.map((character) =>
+      location?.residents.map((character) =>
         Number(character.split('/').pop()),
       ) ?? []
     )
-  }, [episode])
+  }, [location])
 
   const {
     data: characters,
@@ -47,7 +45,7 @@ function EpisodeDetailsPage() {
     return <Loading />
   }
 
-  if (isError || !episode) {
+  if (isError || !location) {
     return (
       <h1 className="text-center text-red-500 font-semibold">
         Não foi possível carregar o personagem.
@@ -58,30 +56,34 @@ function EpisodeDetailsPage() {
   return (
     <>
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
-        Detalhes do episódio
+        Detalhes da localização
       </h2>
       <div className="w-2xs mx-auto bg-gray-100 p-4 space-y-2 rounded-md flex items-center h-40 justify-center">
         <div className="flex flex-col items-center gap-2">
-          <h2 className="text-center font-semibold">{episode.name}</h2>
+          <h2 className="text-center font-semibold">{location.name}</h2>
           <div className="flex text-sm text-center gap-1">
-            <span className="text-gray-600">Episódio:</span>
-            <span>{episode.episode}</span>
+            <span className="text-gray-600">Tipo:</span>
+            <span>{location.type}</span>
           </div>
           <div className="flex flex-col text-sm text-center">
-            <span className="text-gray-600">Data de exibição:</span>
-            <span>{episode.air_date}</span>
+            <span className="text-gray-600">Dimensão:</span>
+            <span>{location.dimension}</span>
           </div>
         </div>
       </div>
       <h2 className="text-xl text-gray-800 font-semibold text-center my-6">
-        Participações neste episódio
+        Personagens dessa localização
       </h2>
       {isErrorCharacters ? (
         <div className="text-center text-red-500 font-semibold">
-          Erro ao carregar episódios.
+          Erro ao carregar personagens.
         </div>
       ) : isLoadingCharacters ? (
         <LoadingMini />
+      ) : charactersIds?.length === 0 ? (
+        <div className="text-center text-gray-500 font-medium">
+          Nenhum personagem encontrado nessa localização.
+        </div>
       ) : (
         <div className="bg-gray-50 p-4 grid grid-cols-4 gap-4">
           {characters?.map((character) => (

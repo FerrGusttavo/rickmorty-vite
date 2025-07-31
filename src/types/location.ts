@@ -18,3 +18,10 @@ export interface GetAllLocationsResponse {
   info: Info
   results: LocationListItem[]
 }
+
+export interface GetLocationByIdParams {
+  locationId: string
+}
+export interface GetLocationByIdResponse extends LocationListItem {
+  residents: string[]
+}

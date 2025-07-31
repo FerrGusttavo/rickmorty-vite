@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
-import { getCharacterDetails } from '@/services/get-character-details'
+import { getCharacterById } from '@/services/get-character-by-id'
 import { getEpisodeById } from '@/services/get-episode-by-id'
 import { Loading } from '@/shared/components/loading'
 import { LoadingMini } from '@/shared/components/loading-mini'
@@ -22,7 +22,7 @@ function CharacterDetailsPage() {
     isSuccess,
   } = useQuery({
     queryKey: ['character', characterId],
-    queryFn: () => getCharacterDetails({ charactersIds: characterId }),
+    queryFn: () => getCharacterById({ charactersIds: characterId }),
   })
 
   const character = characters?.[0]

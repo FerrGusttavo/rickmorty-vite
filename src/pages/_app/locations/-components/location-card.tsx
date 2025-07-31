@@ -8,7 +8,7 @@ interface LocationCardProps {
 export function LocationCard({ location }: LocationCardProps) {
   return (
     <Link
-      to={'/location/$locationId'}
+      to={'/locations/$locationId'}
       params={{ locationId: location.id }}
       className="bg-gray-100 p-4 space-y-2 rounded-md flex items-center h-40 justify-center"
     >

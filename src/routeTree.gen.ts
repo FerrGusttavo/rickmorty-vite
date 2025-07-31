@@ -13,6 +13,7 @@ import { Route as AppLayoutRouteImport } from './pages/_app/layout'
 import { Route as AppLocationsIndexRouteImport } from './pages/_app/locations/index'
 import { Route as AppEpisodesIndexRouteImport } from './pages/_app/episodes/index'
 import { Route as AppIndexIndexRouteImport } from './pages/_app/_index/index'
+import { Route as AppLocationsLocationIdIndexRouteImport } from './pages/_app/locations/$locationId/index'
 import { Route as AppEpisodesEpisodeIdIndexRouteImport } from './pages/_app/episodes/$episodeId/index'
 import { Route as AppIndexCharactersCharacterIdIndexRouteImport } from './pages/_app/_index/characters/$characterId/index'
 
@@ -35,6 +36,12 @@ const AppIndexIndexRoute = AppIndexIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppLayoutRoute,
 } as any)
+const AppLocationsLocationIdIndexRoute =
+  AppLocationsLocationIdIndexRouteImport.update({
+    id: '/locations/$locationId/',
+    path: '/locations/$locationId/',
+    getParentRoute: () => AppLayoutRoute,
+  } as any)
 const AppEpisodesEpisodeIdIndexRoute =
   AppEpisodesEpisodeIdIndexRouteImport.update({
     id: '/episodes/$episodeId/',
@@ -53,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/episodes': typeof AppEpisodesIndexRoute
   '/locations': typeof AppLocationsIndexRoute
   '/episodes/$episodeId': typeof AppEpisodesEpisodeIdIndexRoute
+  '/locations/$locationId': typeof AppLocationsLocationIdIndexRoute
   '/characters/$characterId': typeof AppIndexCharactersCharacterIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,6 +68,7 @@ export interface FileRoutesByTo {
   '/episodes': typeof AppEpisodesIndexRoute
   '/locations': typeof AppLocationsIndexRoute
   '/episodes/$episodeId': typeof AppEpisodesEpisodeIdIndexRoute
+  '/locations/$locationId': typeof AppLocationsLocationIdIndexRoute
   '/characters/$characterId': typeof AppIndexCharactersCharacterIdIndexRoute
 }
 export interface FileRoutesById {
@@ -69,6 +78,7 @@ export interface FileRoutesById {
   '/_app/episodes/': typeof AppEpisodesIndexRoute
   '/_app/locations/': typeof AppLocationsIndexRoute
   '/_app/episodes/$episodeId/': typeof AppEpisodesEpisodeIdIndexRoute
+  '/_app/locations/$locationId/': typeof AppLocationsLocationIdIndexRoute
   '/_app/_index/characters/$characterId/': typeof AppIndexCharactersCharacterIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -78,6 +88,7 @@ export interface FileRouteTypes {
     | '/episodes'
     | '/locations'
     | '/episodes/$episodeId'
+    | '/locations/$locationId'
     | '/characters/$characterId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -85,6 +96,7 @@ export interface FileRouteTypes {
     | '/episodes'
     | '/locations'
     | '/episodes/$episodeId'
+    | '/locations/$locationId'
     | '/characters/$characterId'
   id:
     | '__root__'
@@ -93,6 +105,7 @@ export interface FileRouteTypes {
     | '/_app/episodes/'
     | '/_app/locations/'
     | '/_app/episodes/$episodeId/'
+    | '/_app/locations/$locationId/'
     | '/_app/_index/characters/$characterId/'
   fileRoutesById: FileRoutesById
 }
@@ -130,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexIndexRouteImport
       parentRoute: typeof AppLayoutRoute
     }
+    '/_app/locations/$locationId/': {
+      id: '/_app/locations/$locationId/'
+      path: '/locations/$locationId'
+      fullPath: '/locations/$locationId'
+      preLoaderRoute: typeof AppLocationsLocationIdIndexRouteImport
+      parentRoute: typeof AppLayoutRoute
+    }
     '/_app/episodes/$episodeId/': {
       id: '/_app/episodes/$episodeId/'
       path: '/episodes/$episodeId'
@@ -152,6 +172,7 @@ interface AppLayoutRouteChildren {
   AppEpisodesIndexRoute: typeof AppEpisodesIndexRoute
   AppLocationsIndexRoute: typeof AppLocationsIndexRoute
   AppEpisodesEpisodeIdIndexRoute: typeof AppEpisodesEpisodeIdIndexRoute
+  AppLocationsLocationIdIndexRoute: typeof AppLocationsLocationIdIndexRoute
   AppIndexCharactersCharacterIdIndexRoute: typeof AppIndexCharactersCharacterIdIndexRoute
 }
 
@@ -160,6 +181,7 @@ const AppLayoutRouteChildren: AppLayoutRouteChildren = {
   AppEpisodesIndexRoute: AppEpisodesIndexRoute,
   AppLocationsIndexRoute: AppLocationsIndexRoute,
   AppEpisodesEpisodeIdIndexRoute: AppEpisodesEpisodeIdIndexRoute,
+  AppLocationsLocationIdIndexRoute: AppLocationsLocationIdIndexRoute,
   AppIndexCharactersCharacterIdIndexRoute:
     AppIndexCharactersCharacterIdIndexRoute,
 }
