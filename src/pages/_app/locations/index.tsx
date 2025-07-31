@@ -58,7 +58,7 @@ function LocationsPage() {
         numberPages={locations.info.pages}
         numberItems={locations.info.count}
       />
-      <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="w-full bg-gray-100 p-4 grid grid-cols-2 md:grid-cols-4 gap-4 rounded">
         {locations.results.map((location) => (
           <LocationCard key={location.id} location={location} />
         ))}

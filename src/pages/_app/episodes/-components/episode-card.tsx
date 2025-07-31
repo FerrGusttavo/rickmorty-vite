@@ -10,7 +10,7 @@ export function EpisodeCard({ episode }: EpisodeCardProps) {
     <Link
       to={'/episodes/$episodeId'}
       params={{ episodeId: episode.id }}
-      className="bg-gray-100 p-4 space-y-2 rounded-md flex items-center h-40 justify-center"
+      className="bg-gray-200 p-4 space-y-2 rounded-md flex items-center h-40 justify-center border border-gray-300 shadow-md"
     >
       <div className="flex flex-col items-center gap-2">
         <h2 className="text-center font-semibold">{episode.name}</h2>

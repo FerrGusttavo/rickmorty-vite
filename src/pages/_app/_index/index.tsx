@@ -19,10 +19,15 @@ function Index() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigate({ to: '/characters', replace: true })
-    }, 1000)
-
+    }, 1500)
     return () => clearTimeout(timeout)
   }, [navigate])
 
-  return <Loading />
+  return (
+    <div className="fixed inset-0 h-screen w-screen bg-[#0bff9a] flex bg-surface items-center justify-center z-50">
+      <h1 className="text-4xl md:text-5xl font-black text-black drop-shadow-[0_0_15px_#00ffcc] animate-bounce">
+        Rick and Morty
+      </h1>
+    </div>
+  )
 }

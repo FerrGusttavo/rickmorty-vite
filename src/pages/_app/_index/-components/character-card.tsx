@@ -13,7 +13,7 @@ export function CharacterCard({ character }: CharacterCardProps) {
     <Link
       to={'/characters/$characterId'}
       params={{ characterId: character.id }}
-      className="bg-gray-100 p-4 space-y-2 rounded-md"
+      className="bg-gray-200 p-4 space-y-2 rounded-md border border-gray-300 shadow-md"
     >
       <div className="relative w-full h-40">
         {isLoading && (

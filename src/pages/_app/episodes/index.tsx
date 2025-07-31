@@ -58,7 +58,7 @@ function EpisodesPage() {
         numberPages={episodes.info.pages}
         numberItems={episodes.info.count}
       />
-      <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="w-full bg-gray-100 p-4 grid grid-cols-2 md:grid-cols-4 gap-4 rounded">
         {episodes.results.map((episode) => (
           <EpisodeCard key={episode.id} episode={episode} />
         ))}

@@ -19,7 +19,9 @@ export function Header() {
   return (
     <header className="flex items-center px-4 h-16 bg-gray-50 shadow-md mb-8">
       <nav className="w-full max-w-4xl mx-auto flex justify-between items-center">
-        <h1 className="text-blue-500 font-bold text-2xl">Rick and Morty</h1>
+        <h1 className="text-blue-500 font-bold text-2xl select-none">
+          Rick and Morty
+        </h1>
         <div className="flex flex-wrap">
           {options.map((option) => {
             return (

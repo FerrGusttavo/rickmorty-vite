@@ -78,7 +78,7 @@ function CharacterDetailsPage() {
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
         Detalhes do Personagem
       </h2>
-      <div className="bg-gray-100 max-w-2xl p-4 mx-auto h-64 flex items-center gap-4 justify-center shadow-lg">
+      <div className="bg-gray-200 rounded-md max-w-2xl p-4 mx-auto h-64 flex items-center gap-4 justify-center shadow-lg">
         <img
           src={character?.image}
           alt={character?.name}
@@ -134,7 +134,7 @@ function CharacterDetailsPage() {
       ) : isLoadingEpisodes ? (
         <LoadingMini />
       ) : (
-        <div className="bg-gray-50 p-4 grid grid-cols-4 gap-4">
+        <div className="bg-gray-100 rounded p-4 grid grid-cols-4 gap-4">
           {episodes?.map((episode) => (
             <EpisodeCard key={episode.id} episode={episode} />
           ))}

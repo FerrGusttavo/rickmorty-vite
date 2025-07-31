@@ -65,7 +65,7 @@ function LocationDetailsPage() {
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
         Detalhes da Localização
       </h2>
-      <div className="w-2xs mx-auto bg-gray-100 p-4 space-y-2 rounded-md flex items-center h-40 justify-center">
+      <div className="w-2xs mx-auto bg-gray-200 p-4 space-y-2 rounded-md flex items-center h-40 justify-center">
         <div className="flex flex-col items-center gap-2">
           <h2 className="text-center font-semibold">{location.name}</h2>
           <div className="flex text-sm text-center gap-1">
@@ -73,8 +73,12 @@ function LocationDetailsPage() {
             <span>{location.type}</span>
           </div>
           <div className="flex flex-col text-sm text-center">
-            <span className="text-gray-600">Dimensão:</span>
-            <span>{location.dimension}</span>
+            {location.dimension && (
+              <>
+                <span className="text-gray-600">Dimensão:</span>
+                <span>{location.dimension}</span>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -92,7 +96,7 @@ function LocationDetailsPage() {
           Nenhum personagem encontrado nessa localização.
         </div>
       ) : (
-        <div className="bg-gray-50 p-4 grid grid-cols-4 gap-4">
+        <div className="bg-gray-100 rounded p-4 grid grid-cols-4 gap-4">
           {characters?.map((character) => (
             <CharacterCard key={character.id} character={character} />
           ))}

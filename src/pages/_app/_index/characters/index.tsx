@@ -60,7 +60,7 @@ function HomePage() {
           numberItems={characters.info.count}
         />
       )}
-      <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="w-full bg-gray-100 rounded p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
         {characters.results.map((character) => (
           <CharacterCard key={character.id} character={character} />
         ))}
