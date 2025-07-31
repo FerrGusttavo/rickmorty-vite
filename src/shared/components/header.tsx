@@ -2,9 +2,8 @@ import { Link, linkOptions } from '@tanstack/react-router'
 
 const options = linkOptions([
   {
-    to: '/',
+    to: '/characters',
     label: 'Personagens',
-    activeOptions: { exact: true, includeSearch: false },
   },
   {
     to: '/episodes',

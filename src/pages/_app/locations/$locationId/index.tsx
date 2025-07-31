@@ -8,6 +8,13 @@ import { LoadingMini } from '@/shared/components/loading-mini'
 import { CharacterCard } from '../../_index/-components/character-card'
 
 export const Route = createFileRoute('/_app/locations/$locationId/')({
+  head: () => ({
+    meta: [
+      {
+        title: 'Detalhes da Localização — Rick and Morty',
+      },
+    ],
+  }),
   component: LocationDetailsPage,
 })
 
@@ -48,7 +55,7 @@ function LocationDetailsPage() {
   if (isError || !location) {
     return (
       <h1 className="text-center text-red-500 font-semibold">
-        Não foi possível carregar o personagem.
+        Não foi possível carregar a localização.
       </h1>
     )
   }
@@ -56,7 +63,7 @@ function LocationDetailsPage() {
   return (
     <>
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
-        Detalhes da localização
+        Detalhes da Localização
       </h2>
       <div className="w-2xs mx-auto bg-gray-100 p-4 space-y-2 rounded-md flex items-center h-40 justify-center">
         <div className="flex flex-col items-center gap-2">

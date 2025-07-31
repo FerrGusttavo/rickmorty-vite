@@ -8,6 +8,13 @@ import { LoadingMini } from '@/shared/components/loading-mini'
 import { EpisodeCard } from '../../../episodes/-components/episode-card'
 
 export const Route = createFileRoute('/_app/_index/characters/$characterId/')({
+  head: () => ({
+    meta: [
+      {
+        title: 'Detalhes do Personagem — Rick and Morty',
+      },
+    ],
+  }),
   component: CharacterDetailsPage,
 })
 
@@ -69,7 +76,7 @@ function CharacterDetailsPage() {
   return (
     <>
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
-        Detalhes do personagem
+        Detalhes do Personagem
       </h2>
       <div className="bg-gray-100 max-w-2xl p-4 mx-auto h-64 flex items-center gap-4 justify-center shadow-lg">
         <img

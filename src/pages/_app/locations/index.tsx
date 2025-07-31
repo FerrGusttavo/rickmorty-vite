@@ -13,6 +13,13 @@ export const Route = createFileRoute('/_app/locations/')({
       page: validatePageParam(search.page),
     }
   },
+  head: () => ({
+    meta: [
+      {
+        title: 'Localizações - Rick and Morty',
+      },
+    ],
+  }),
   component: LocationsPage,
 })
 
