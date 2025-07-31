@@ -1,7 +1,9 @@
 import { createRootRoute, HeadContent, Outlet } from '@tanstack/react-router'
+import { NotFound } from '@/shared/components/not-found'
 
 export const Route = createRootRoute({
   component: RootComponent,
+  notFoundComponent: NotFound,
 })
 
 function RootComponent() {

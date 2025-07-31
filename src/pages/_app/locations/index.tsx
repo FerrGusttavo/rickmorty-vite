@@ -1,0 +1,61 @@
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { getAllLocations } from '@/services/get-all-locations'
+import { Loading } from '@/shared/components/loading'
+import { Pagination } from '@/shared/components/pagination'
+import { validatePageParam } from '@/shared/utils/validate-page'
+import { LocationCard } from './-components/location-card'
+
+export const Route = createFileRoute('/_app/locations/')({
+  validateSearch: (search) => {
+    return {
+      page: validatePageParam(search.page),
+    }
+  },
+  component: LocationsPage,
+})
+
+function LocationsPage() {
+  const { page } = Route.useSearch()
+  const navigate = useNavigate()
+
+  const {
+    data: locations,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ['locations', page],
+    queryFn: () => getAllLocations({ page }),
+    retry: false,
+    placeholderData: keepPreviousData,
+  })
+
+  useEffect(() => {
+    if (isError) {
+      navigate({ search: { page: 1 }, from: Route.fullPath })
+    }
+  }, [isError, navigate])
+
+  if (isLoading || !locations) {
+    return <Loading />
+  }
+
+  return (
+    <>
+      <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
+        Localizações
+      </h2>
+      <Pagination
+        currentPage={page}
+        numberPages={locations.info.pages}
+        numberItems={locations.info.count}
+      />
+      <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+        {locations.results.map((location) => (
+          <LocationCard key={location.id} location={location} />
+        ))}
+      </div>
+    </>
+  )
+}
