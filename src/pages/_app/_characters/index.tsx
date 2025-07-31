@@ -7,7 +7,7 @@ import { getAllCharacters } from '@/services/get-all-characters'
 import { validatePageParam } from '@/utils/validate-page'
 import { CharacterCard } from './-components/character-card'
 
-export const Route = createFileRoute('/_app/')({
+export const Route = createFileRoute('/_app/_characters/')({
   validateSearch: (search) => {
     return {
       page: validatePageParam(search.page),

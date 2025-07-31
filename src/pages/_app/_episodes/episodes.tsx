@@ -3,30 +3,30 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { Loading } from '@/components/loading'
 import { Pagination } from '@/components/pagination'
-import { getAllLocations } from '@/services/get-all-locations'
+import { getAllEpisodes } from '@/services/get-all-episodes'
 import { validatePageParam } from '@/utils/validate-page'
-import { LocationCard } from './-components/location-card'
+import { EpisodeCard } from './-components/episode-card'
 
-export const Route = createFileRoute('/_app/locations')({
+export const Route = createFileRoute('/_app/_episodes/episodes')({
   validateSearch: (search) => {
     return {
       page: validatePageParam(search.page),
     }
   },
-  component: LocationsPage,
+  component: EpisodesPage,
 })
 
-function LocationsPage() {
+function EpisodesPage() {
   const { page } = Route.useSearch()
   const navigate = useNavigate()
 
   const {
-    data: locations,
+    data: episodes,
     isError,
     isLoading,
   } = useQuery({
-    queryKey: ['locations', page],
-    queryFn: () => getAllLocations({ page }),
+    queryKey: ['episodes', page],
+    queryFn: () => getAllEpisodes({ page }),
     retry: false,
     placeholderData: keepPreviousData,
   })
@@ -37,23 +37,23 @@ function LocationsPage() {
     }
   }, [isError, navigate])
 
-  if (isLoading || !locations) {
+  if (isLoading || !episodes) {
     return <Loading />
   }
 
   return (
     <>
       <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
-        Localizações
+        Episódios
       </h2>
       <Pagination
         currentPage={page}
-        numberPages={locations.info.pages}
-        numberItems={locations.info.count}
+        numberPages={episodes.info.pages}
+        numberItems={episodes.info.count}
       />
       <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {locations.results.map((location) => (
-          <LocationCard key={location.id} location={location} />
+        {episodes.results.map((episode) => (
+          <EpisodeCard key={episode.id} episode={episode} />
         ))}
       </div>
     </>

@@ -11,7 +11,8 @@ export function CharacterCard({ character }: CharacterCardProps) {
 
   return (
     <Link
-      to={`character/${character.id}`}
+      to={'/character/$characterId'}
+      params={{ characterId: character.id }}
       className="bg-gray-100 p-4 space-y-2 rounded-md"
     >
       <div className="relative w-full h-40">
