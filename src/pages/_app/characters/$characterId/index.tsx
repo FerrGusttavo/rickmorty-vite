@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
+import { BackButton } from '@/components/back-button'
 import { EpisodeCard } from '@/components/episode-card'
 import { Loading } from '@/components/loading'
 import { LoadingMini } from '@/components/loading-mini'
@@ -76,6 +77,7 @@ function CharacterDetailsPage() {
 
   return (
     <>
+      <BackButton />
       <h2 className="text-xl font-semibold text-center mb-4">
         Detalhes do Personagem
       </h2>
