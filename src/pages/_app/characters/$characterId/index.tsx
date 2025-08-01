@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
 import { EpisodeCard } from '@/components/episode-card'
 import { Loading } from '@/components/loading'
 import { LoadingMini } from '@/components/loading-mini'
 import { getCharacterById } from '@/services/get-character-by-id'
 import { getEpisodeById } from '@/services/get-episode-by-id'
+import { getIdFromUrl } from '@/utils/get-id-from-url'
 
 export const Route = createFileRoute('/_app/characters/$characterId/')({
   head: () => ({
@@ -48,7 +49,7 @@ function CharacterDetailsPage() {
   } = useQuery({
     queryKey: ['episodes', episodesIds],
     queryFn: () => getEpisodeById({ episodesIds: episodesIds ?? [] }),
-    enabled: !!episodesIds?.length,
+    enabled: !!episodesIds.length,
   })
 
   useEffect(() => {
@@ -80,37 +81,47 @@ function CharacterDetailsPage() {
       </h2>
       <div className="bg-gray-200 rounded-md max-w-2xl p-4 mx-auto h-64 flex items-center gap-4 justify-center shadow-lg">
         <img
-          src={character?.image}
-          alt={character?.name}
+          src={character.image}
+          alt={character.name}
           className={`h-full object-cover rounded-md transition-opacity shadow duration-300 ${
             showImage ? 'opacity-100' : 'opacity-0'
           }`}
         />
         <div className="flex flex-col gap-2 justify-around h-full">
           <div>
-            <h3 className="text-xl font-semibold">{character?.name}</h3>
+            <h3 className="text-xl font-semibold">{character.name}</h3>
             <div className="flex items-center space-x-1">
               <span className="font-medium text-gray-600">Espécie:</span>
-              <span className="font-light">{character?.species}</span>
+              <span className="font-light">{character.species}</span>
             </div>
           </div>
           <div>
             <div className="flex items-center space-x-1">
               <span className="font-medium text-gray-600">Origem:</span>
-              <span className="font-light">{character?.origin.name}</span>
+              {character.origin.name === 'unknown' ? (
+                <span className="font-light">{character.origin.name}</span>
+              ) : (
+                <Link
+                  from="/characters"
+                  to={`/locations/${getIdFromUrl(character.origin.url)}`}
+                  className="underline"
+                >
+                  {character.origin.name}
+                </Link>
+              )}
             </div>
             <div className="flex items-center space-x-1">
               <span className="font-medium text-gray-600">Condição:</span>
               <span
                 className={`font-medium ${
-                  character?.status === 'Alive'
-                    ? 'text-green-500'
-                    : character?.status === 'Dead'
-                      ? 'text-red-500'
+                  character.status === 'Alive'
+                    ? 'text-green-600'
+                    : character.status === 'Dead'
+                      ? 'text-red-600'
                       : 'font-normal'
                 }`}
               >
-                {character?.status}
+                {character.status}
               </span>
             </div>
           </div>
@@ -118,9 +129,17 @@ function CharacterDetailsPage() {
             <span className="font-medium whitespace-nowrap text-gray-600">
               Última localização:
             </span>
-            <span className="font-light whitespace-nowrap">
-              {character?.location.name}
-            </span>
+            {character.location.name === 'unknown' ? (
+              <span className="font-light">{character.location.name}</span>
+            ) : (
+              <Link
+                from="/characters"
+                to={`/locations/${getIdFromUrl(character.location.url)}`}
+                className="underline"
+              >
+                {character.location.name}
+              </Link>
+            )}
           </div>
         </div>
       </div>

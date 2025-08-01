@@ -38,9 +38,9 @@ export function CharacterCard({ character }: CharacterCardProps) {
         <span
           className={`font-medium ${
             character.status === 'Alive'
-              ? 'text-green-500'
+              ? 'text-green-600'
               : character.status === 'Dead'
-                ? 'text-red-500'
+                ? 'text-red-600'
                 : 'text-black'
           }`}
         >
