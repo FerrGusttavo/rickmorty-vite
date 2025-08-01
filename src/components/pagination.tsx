@@ -5,12 +5,14 @@ interface PaginationProps {
   currentPage: number
   numberPages: number
   numberItems: number
+  isDisabled: boolean
 }
 
 export function Pagination({
   currentPage,
   numberPages,
   numberItems,
+  isDisabled,
 }: PaginationProps) {
   const navigate = useNavigate()
 
@@ -96,8 +98,12 @@ export function Pagination({
           className="grid size-8 place-content-center rounded border border-gray-200 transition-colors cursor-pointer hover:bg-gray-50 rtl:rotate-180 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Next page"
           title="Next page"
-          disabled={currentPage === numberPages}
-          onClick={() => changePage(currentPage + 1)}
+          disabled={isDisabled || currentPage === numberPages}
+          onClick={() => {
+            if (!isDisabled) {
+              changePage(currentPage + 1)
+            }
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

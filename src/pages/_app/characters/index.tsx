@@ -41,12 +41,15 @@ function HomePage() {
     isError,
     isLoading,
     isFetching,
+    isPlaceholderData,
   } = useQuery({
     queryKey: ['characters', page, name],
     queryFn: () => getAllCharacters({ page, name }),
     retry: false,
     placeholderData: keepPreviousData,
   })
+
+  console.log(isPlaceholderData)
 
   const { register, handleSubmit, reset, watch } = useForm<SearchSchema>()
 
@@ -118,6 +121,7 @@ function HomePage() {
           currentPage={page}
           numberPages={characters.info.pages}
           numberItems={characters.info.count}
+          isDisabled={isPlaceholderData}
         />
       </div>
 
