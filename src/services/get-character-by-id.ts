@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios'
-import { api } from '@/lib/axios/api'
 import type {
   GetCharacterDetailsRequestParams,
   GetCharacterDetailsResponse,
-} from '@/types/character'
+} from '@/@types/character'
+import { api } from '@/lib/axios/api'
 
 export async function getCharacterById({
   charactersIds,

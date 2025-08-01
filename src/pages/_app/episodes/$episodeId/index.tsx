@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo } from 'react'
+import { Loading } from '@/components/loading'
+import { LoadingMini } from '@/components/loading-mini'
 import { getCharacterById } from '@/services/get-character-by-id'
 import { getEpisodeById } from '@/services/get-episode-by-id'
-import { Loading } from '@/shared/components/loading'
-import { LoadingMini } from '@/shared/components/loading-mini'
-import { CharacterCard } from '../../_index/-components/character-card'
+import { CharacterCard } from '../../../../components/character-card'
 
 export const Route = createFileRoute('/_app/episodes/$episodeId/')({
   head: () => ({
@@ -64,23 +64,23 @@ function EpisodeDetailsPage() {
 
   return (
     <>
-      <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
+      <h2 className="text-xl font-semibold text-center mb-4">
         Detalhes do Episódio
       </h2>
       <div className="w-2xs mx-auto bg-gray-200 p-4 space-y-2 rounded-md flex items-center h-40 justify-center">
         <div className="flex flex-col items-center gap-2">
           <h2 className="text-center font-semibold">{episode.name}</h2>
           <div className="flex text-sm text-center gap-1">
-            <span className="text-gray-600">Episódio:</span>
+            <span className="text-gray-800">Episódio:</span>
             <span>{episode.episode}</span>
           </div>
           <div className="flex flex-col text-sm text-center">
-            <span className="text-gray-600">Data de exibição:</span>
+            <span className="text-gray-800">Data de exibição:</span>
             <span>{episode.air_date}</span>
           </div>
         </div>
       </div>
-      <h2 className="text-xl text-gray-800 font-semibold text-center my-6">
+      <h2 className="text-xl font-semibold text-center my-6">
         Participações neste episódio
       </h2>
       {isErrorCharacters ? (

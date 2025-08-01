@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios'
-import { api } from '@/lib/axios/api'
 import type {
   GetAllCharactersParams,
   GetAllCharactersResponse,
-} from '@/types/character'
+} from '@/@types/character'
+import { api } from '@/lib/axios/api'
 
 export async function getAllCharacters({
   page,

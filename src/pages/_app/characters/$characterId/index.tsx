@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useMemo, useState } from 'react'
+import { EpisodeCard } from '@/components/episode-card'
+import { Loading } from '@/components/loading'
+import { LoadingMini } from '@/components/loading-mini'
 import { getCharacterById } from '@/services/get-character-by-id'
 import { getEpisodeById } from '@/services/get-episode-by-id'
-import { Loading } from '@/shared/components/loading'
-import { LoadingMini } from '@/shared/components/loading-mini'
-import { EpisodeCard } from '../../../episodes/-components/episode-card'
 
-export const Route = createFileRoute('/_app/_index/characters/$characterId/')({
+export const Route = createFileRoute('/_app/characters/$characterId/')({
   head: () => ({
     meta: [
       {
@@ -75,7 +75,7 @@ function CharacterDetailsPage() {
 
   return (
     <>
-      <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
+      <h2 className="text-xl font-semibold text-center mb-4">
         Detalhes do Personagem
       </h2>
       <div className="bg-gray-200 rounded-md max-w-2xl p-4 mx-auto h-64 flex items-center gap-4 justify-center shadow-lg">
@@ -124,7 +124,7 @@ function CharacterDetailsPage() {
           </div>
         </div>
       </div>
-      <h2 className="text-xl text-gray-800 font-semibold text-center my-6">
+      <h2 className="text-xl font-semibold text-center my-6">
         Episódios com participação de {character.name}
       </h2>
       {isErrorEpisodes ? (

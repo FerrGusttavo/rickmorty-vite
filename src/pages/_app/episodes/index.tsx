@@ -1,11 +1,11 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
+import { Loading } from '@/components/loading'
+import { Pagination } from '@/components/pagination'
 import { getAllEpisodes } from '@/services/get-all-episodes'
-import { Loading } from '@/shared/components/loading'
-import { Pagination } from '@/shared/components/pagination'
-import { validatePageParam } from '@/shared/utils/validate-page'
-import { EpisodeCard } from './-components/episode-card'
+import { validatePageParam } from '@/utils/validate-page'
+import { EpisodeCard } from '../../../components/episode-card'
 
 export const Route = createFileRoute('/_app/episodes/')({
   validateSearch: (search) => {
@@ -50,9 +50,7 @@ function EpisodesPage() {
 
   return (
     <>
-      <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
-        Episódios
-      </h2>
+      <h2 className="text-xl font-semibold text-center mb-4">Episódios</h2>
       <Pagination
         currentPage={page}
         numberPages={episodes.info.pages}

@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
-import type { CharacterListItem } from '@/types/character'
+import type { CharacterListItem } from '@/@types/character'
 
 interface CharacterCardProps {
   character: CharacterListItem
@@ -34,14 +34,14 @@ export function CharacterCard({ character }: CharacterCardProps) {
       </div>
 
       <div className="text-sm space-x-1 text-center">
-        <span className="text-gray-600">Condição:</span>
+        <span className="text-gray-800">Condição:</span>
         <span
           className={`font-medium ${
             character.status === 'Alive'
               ? 'text-green-500'
               : character.status === 'Dead'
                 ? 'text-red-500'
-                : 'text-gray-800'
+                : 'text-black'
           }`}
         >
           {character.status}
@@ -49,7 +49,7 @@ export function CharacterCard({ character }: CharacterCardProps) {
       </div>
 
       <div className="flex flex-col text-sm text-center">
-        <span className="text-gray-600">Última localização:</span>
+        <span className="text-gray-800">Última localização:</span>
         <span>{character.location.name}</span>
       </div>
     </Link>

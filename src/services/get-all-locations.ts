@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios'
-import { api } from '@/lib/axios/api'
 import type {
   GetAllLocationsParams,
   GetAllLocationsResponse,
-} from '@/types/location'
+} from '@/@types/location'
+import { api } from '@/lib/axios/api'
 
 export async function getAllLocations({
   page,

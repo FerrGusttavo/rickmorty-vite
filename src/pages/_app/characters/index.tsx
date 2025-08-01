@@ -1,13 +1,13 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
+import { CharacterCard } from '@/components/character-card'
+import { Loading } from '@/components/loading'
+import { Pagination } from '@/components/pagination'
 import { getAllCharacters } from '@/services/get-all-characters'
-import { Loading } from '@/shared/components/loading'
-import { Pagination } from '@/shared/components/pagination'
-import { validatePageParam } from '@/shared/utils/validate-page'
-import { CharacterCard } from '../-components/character-card'
+import { validatePageParam } from '@/utils/validate-page'
 
-export const Route = createFileRoute('/_app/_index/characters/')({
+export const Route = createFileRoute('/_app/characters/')({
   validateSearch: (search) => {
     return {
       page: validatePageParam(search.page),
@@ -50,7 +50,7 @@ function HomePage() {
 
   return (
     <>
-      <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
+      <h2 className="text-xl text-black font-semibold text-center mb-4">
         Personagens
       </h2>
       {characters.info.pages > 1 && (

@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo } from 'react'
+import { Loading } from '@/components/loading'
+import { LoadingMini } from '@/components/loading-mini'
 import { getCharacterById } from '@/services/get-character-by-id'
 import { getLocationById } from '@/services/get-location-by-id'
-import { Loading } from '@/shared/components/loading'
-import { LoadingMini } from '@/shared/components/loading-mini'
-import { CharacterCard } from '../../_index/-components/character-card'
+import { CharacterCard } from '../../../../components/character-card'
 
 export const Route = createFileRoute('/_app/locations/$locationId/')({
   head: () => ({
@@ -62,27 +62,27 @@ function LocationDetailsPage() {
 
   return (
     <>
-      <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
+      <h2 className="text-xl font-semibold text-center mb-4">
         Detalhes da Localização
       </h2>
       <div className="w-2xs mx-auto bg-gray-200 p-4 space-y-2 rounded-md flex items-center h-40 justify-center">
         <div className="flex flex-col items-center gap-2">
           <h2 className="text-center font-semibold">{location.name}</h2>
           <div className="flex text-sm text-center gap-1">
-            <span className="text-gray-600">Tipo:</span>
+            <span className="text-gray-800">Tipo:</span>
             <span>{location.type}</span>
           </div>
           <div className="flex flex-col text-sm text-center">
             {location.dimension && (
               <>
-                <span className="text-gray-600">Dimensão:</span>
+                <span className="text-gray-800">Dimensão:</span>
                 <span>{location.dimension}</span>
               </>
             )}
           </div>
         </div>
       </div>
-      <h2 className="text-xl text-gray-800 font-semibold text-center my-6">
+      <h2 className="text-xl font-semibold text-center my-6">
         Personagens dessa localização
       </h2>
       {isErrorCharacters ? (
