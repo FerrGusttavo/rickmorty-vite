@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios'
-import { api } from '@/lib/axios/api'
 import type {
   GetAllEpisodesParams,
   GetAllEpisodesResponse,
-} from '@/types/episode'
+} from '@/@types/episode'
+import { api } from '@/lib/axios/api'
 
 export async function getAllEpisodes({
   page,

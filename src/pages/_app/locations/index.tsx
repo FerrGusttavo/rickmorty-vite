@@ -1,11 +1,11 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect } from 'react'
+import { Loading } from '@/components/loading'
+import { Pagination } from '@/components/pagination'
 import { getAllLocations } from '@/services/get-all-locations'
-import { Loading } from '@/shared/components/loading'
-import { Pagination } from '@/shared/components/pagination'
-import { validatePageParam } from '@/shared/utils/validate-page'
-import { LocationCard } from './-components/location-card'
+import { validatePageParam } from '@/utils/validate-page'
+import { LocationCard } from '../../../components/location-card'
 
 export const Route = createFileRoute('/_app/locations/')({
   validateSearch: (search) => {
@@ -13,6 +13,13 @@ export const Route = createFileRoute('/_app/locations/')({
       page: validatePageParam(search.page),
     }
   },
+  head: () => ({
+    meta: [
+      {
+        title: 'Localizações - Rick and Morty',
+      },
+    ],
+  }),
   component: LocationsPage,
 })
 
@@ -43,15 +50,13 @@ function LocationsPage() {
 
   return (
     <>
-      <h2 className="text-xl text-orange-500 font-semibold text-center mb-4">
-        Localizações
-      </h2>
+      <h2 className="text-xl font-semibold text-center mb-4">Localizações</h2>
       <Pagination
         currentPage={page}
         numberPages={locations.info.pages}
         numberItems={locations.info.count}
       />
-      <div className="w-full bg-gray-50 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="w-full bg-gray-100 p-4 grid grid-cols-2 md:grid-cols-4 gap-4 rounded">
         {locations.results.map((location) => (
           <LocationCard key={location.id} location={location} />
         ))}

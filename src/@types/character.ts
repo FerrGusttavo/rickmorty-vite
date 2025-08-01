@@ -12,6 +12,11 @@ export interface CharacterListItem {
 export interface CharacterDetails extends CharacterListItem {
   origin: {
     name: string
+    url: string
+  }
+  location: {
+    name: string
+    url: string
   }
   episode: string[]
 }
@@ -22,6 +27,7 @@ interface Info {
 
 export interface GetAllCharactersParams {
   page: number
+  name?: string
 }
 
 export interface GetAllCharactersResponse {
