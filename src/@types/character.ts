@@ -27,6 +27,7 @@ interface Info {
 
 export interface GetAllCharactersParams {
   page: number
+  name?: string
 }
 
 export interface GetAllCharactersResponse {
