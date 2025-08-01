@@ -32,6 +32,9 @@ cd rickmorty-vite
 # Instale as dependências
 npm install
 
+# Rode o projeto localmente
+npm run dev
+
 # Acesse dentro do seu navegador
 http://localhost:5173
 ```
