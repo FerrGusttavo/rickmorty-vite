@@ -1,69 +1,67 @@
-# React + TypeScript + Vite
+# Rick and Morty Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web feita com **React 19**, **Vite**, **Tailwind CSS**, **TanStack Router**, **React Hook Form** e **Zod**, consumindo a [API pública do Rick and Morty](https://rickandmortyapi.com/).
 
-Currently, two official plugins are available:
+> Projeto desenvolvido para portfólio com foco em boas práticas, performance e DX moderna.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🔥 Tecnologias e ferramentas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React 19](https://react.dev/)
+- [Vite 7](https://vitejs.dev/)
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [TanStack Router](https://tanstack.com/router/latest)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Axios](https://axios-http.com/)
+- [Biome](https://biomejs.dev/) (lint, format, fix)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 📦 Instalação
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clone o repositório
+git clone https://github.com/ferrgusttavo/rickmorty-vite.git
+
+# Acesse a pasta do projeto
+cd rickmorty-vite
+
+# Instale as dependências
+npm install
+
+# Acesse dentro do seu navegador
+http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📸 Preview
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Página inicial - Lista de Personagens
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+![Preview](./public/preview_1.png)
+
+### Filtro por nome
+
+<img src="./public/preview_5.png" alt="Busca de personagens por nome" width="100%" />
+
+### Detalhes do Personagem
+
+<img src="./public/preview_2.png" alt="Busca de personagens por nome" width="100%" />
+
+### Lista de Episódios
+
+<img src="./public/preview_3.png" alt="Busca de personagens por nome" width="100%" />
+
+### Detalhes de Episódio
+
+<img src="./public/preview_4.png" alt="Busca de personagens por nome" width="100%" />
+
+### Lista de Localizações
+
+<img src="./public/preview_6.png" alt="Busca de personagens por nome" width="100%" />
+
+### Detalhes da Localização
+
+<img src="./public/preview_7.png" alt="Busca de personagens por nome" width="100%" />
